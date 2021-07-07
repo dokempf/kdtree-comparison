@@ -20,9 +20,6 @@ set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 set(BUILD_PYTHON
     ON
     CACHE BOOL "Enable building of Python bindings")
-set(BUILD_DOCS
-    ON
-    CACHE BOOL "Enable building of documentation")
 
 # Check that the repository was clone recursively
 if(NOT EXISTS ${PROJECT_SOURCE_DIR}/ext/Catch2/CMakeLists.txt)
@@ -43,22 +40,6 @@ target_compile_definitions(pcl INTERFACE ${PCL_DEFINITIONS})
 
 # compile the library
 add_subdirectory(src)
-
-# compile the application
-add_subdirectory(app)
-
-# compile the tests
-include(CTest)
-if(BUILD_TESTING)
-  add_subdirectory(ext/Catch2)
-  include(./ext/Catch2/contrib/Catch.cmake)
-  add_subdirectory(tests/c++)
-endif()
-
-if(BUILD_DOCS)
-  # Add the documentation
-  add_subdirectory(doc)
-endif()
 
 if(BUILD_PYTHON)
   # Add Python bindings

@@ -16,9 +16,6 @@ COPY --chown=${NB_UID} . /opt/py4dgeo
 # Build and install the project
 RUN conda run -n base python -m pip install /opt/py4dgeo
 
-# Temporarily install the dev requirements
-RUN conda run -n base python -m pip install -r /opt/py4dgeo/requirements-dev.txt
-
 # Copy all the notebook files into the home directory
 RUN rm -rf ${HOME}/work && \
     cp /opt/py4dgeo/jupyter/* ${HOME}
